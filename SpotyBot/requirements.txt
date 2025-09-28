@@ -1,0 +1,14 @@
+# Core dependencies
+spotdl>=4.2.0
+spotipy>=2.23.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# CLI and configuration
+click>=8.1.0
+pydantic>=2.5.0
+rich>=13.0.0
+
+# Async support
+aiofiles>=23.0.0
+asyncio-throttle>=1.0.2

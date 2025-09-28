@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spotybot"
+version = "1.0.0"
+description = "A Spotify playlist downloader bot using spotDL"
+authors = [{name = "SpotyBot", email = "spotybot@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["spotify", "youtube", "downloader", "music", "playlist"]
+dependencies = [
+    "spotdl>=4.2.0",
+    "spotipy>=2.23.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "click>=8.1.0",
+    "pydantic>=2.5.0",
+    "rich>=13.0.0",
+    "aiofiles>=23.0.0",
+    "asyncio-throttle>=1.0.2"
+]
+
+[project.urls]
+Homepage = "https://github.com/spotybot/spotybot"
+Repository = "https://github.com/spotybot/spotybot.git"
+Issues = "https://github.com/spotybot/spotybot/issues"
+
+[project.scripts]
+spotybot = "spotybot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["spotybot*"]
+
+[tool.setuptools.package-data]
+spotybot = ["config/*.json", "config/*.yaml"]
