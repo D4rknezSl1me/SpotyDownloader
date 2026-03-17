@@ -52,7 +52,21 @@ class SpotifyDownloader:
             client_secret=config.spotify_client_secret,
             downloader_settings=spotdl_options
         )
-        
+
+        # If embedding metadata is disabled in our config, monkeypatch
+        # spotdl's metadata embedding helpers to no-ops so no metadata
+        # or album art is written by the underlying library.
+        if not self.config.embed_metadata:
+            try:
+                import spotdl.utils.metadata as _sd_metadata
+
+                _sd_metadata.embed_metadata = lambda *a, **k: None
+                _sd_metadata.embed_cover = lambda *a, **k: a[0] if a else None
+                _sd_metadata.embed_lyrics = lambda *a, **k: a[0] if a else None
+                logger.info("Metadata embedding disabled via configuration")
+            except Exception:
+                logger.warning("Could not disable spotdl metadata embedding; proceeding as-is")
+
         logger.info(f"Downloader initialized with output directory: {self.config.output_directory}")
         logger.info(f"Using audio provider: {self.config.audio_provider}")
     
